@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/306000404_dying.png-34adcf6abc0d72e0c5fec5828ffe153b.stex"
+path="res://.import/100006204_move.png-818f52973aa014be8f68789dfa56f5f9.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Sprites/Machine/306000404_dying.png"
-dest_files=[ "res://.import/306000404_dying.png-34adcf6abc0d72e0c5fec5828ffe153b.stex" ]
+source_file="res://Sprites/Machine/100006204_move.png"
+dest_files=[ "res://.import/100006204_move.png-818f52973aa014be8f68789dfa56f5f9.stex" ]
 
 [params]
 

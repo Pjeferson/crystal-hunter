@@ -40,16 +40,20 @@ func hideSprites():
 	$Idle.visible = false
 	$Attack.visible = false
 	$Move.visible = false
+	$Dying.visible = false
 	
 func chooseDirection():
 	if direction > 0:
 		$Idle.flip_h = true
 		$Attack.flip_h = true
 		$Move.flip_h = true
+		$Dying.flip_h = true
 	else:
 		$Idle.flip_h = false
 		$Attack.flip_h = false
 		$Move.flip_h = false
+		$Dying.flip_h = false
+
 
 func _on_AnimationPlayer_animation_finished(anim_name):
 	if anim_name == "Attack":
