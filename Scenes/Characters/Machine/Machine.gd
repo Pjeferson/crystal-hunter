@@ -29,12 +29,14 @@ func _physics_process(delta):
 		direction *= -1
 		$RayCast2D.position.x *= -1
 		
-	if $RayCast2D.is_colliding():
-		#é player?
-		is_attacking = true
-		hideSprites()
-		$Attack.visible = true
-		$AnimationPlayer.play("Attack")
+	if $RayCast2D.is_colliding() && !is_attacking:
+		var object = $RayCast2D.get_collider()
+		if "Isa" in object.get_name():
+			object.get_hit(10)
+			is_attacking = true
+			hideSprites()
+			$Attack.visible = true
+			$AnimationPlayer.play("Attack")
 	
 func hideSprites():
 	$Idle.visible = false

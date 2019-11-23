@@ -48,7 +48,10 @@ func _physics_process(delta):
 	
 	velocity.y += GRAVITY
 	velocity = move_and_slide(velocity, FLOOR)
-	
+
+func get_hit(power):
+	print("acertou")
+
 func hideSprites():
 	$Idle.visible = false
 	$Attack.visible = false

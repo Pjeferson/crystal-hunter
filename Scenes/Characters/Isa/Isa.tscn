@@ -6,8 +6,6 @@
 [ext_resource path="res://Sprites/Isa/100010104_move.png" type="Texture" id=4]
 [ext_resource path="res://Sprites/Isa/100010104_jump.png" type="Texture" id=5]
 
-
-
 [sub_resource type="Animation" id=1]
 resource_name = "Attack"
 length = 1.2
@@ -40,7 +38,7 @@ tracks/0/keys = {
 "values": [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 ]
 }
 
-[sub_resource type="Animation" id=5]
+[sub_resource type="Animation" id=3]
 resource_name = "Jump"
 length = 0.1
 tracks/0/type = "value"
@@ -56,8 +54,7 @@ tracks/0/keys = {
 "values": [ 0 ]
 }
 
-[sub_resource type="Animation" id=3]
-resource_name = "Move"
+[sub_resource type="Animation" id=4]
 length = 0.1
 tracks/0/type = "value"
 tracks/0/path = NodePath("Move:frame")
@@ -72,7 +69,7 @@ tracks/0/keys = {
 "values": [ 0 ]
 }
 
-[sub_resource type="RectangleShape2D" id=4]
+[sub_resource type="RectangleShape2D" id=5]
 extents = Vector2( 9.65428, 10.3334 )
 
 [node name="Isa" type="KinematicBody2D"]
@@ -91,8 +88,8 @@ region_rect = Rect2( 0, 0, 258, 252 )
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/Attack = SubResource( 1 )
 anims/Idle = SubResource( 2 )
-anims/Jump = SubResource( 5 )
-anims/Move = SubResource( 3 )
+anims/Jump = SubResource( 3 )
+anims/Move = SubResource( 4 )
 
 [node name="Attack" type="Sprite" parent="."]
 position = Vector2( -5.20987, 2.0247 )
@@ -114,5 +111,5 @@ texture = ExtResource( 5 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 1.58028, 0.790138 )
-shape = SubResource( 4 )
+shape = SubResource( 5 )
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]

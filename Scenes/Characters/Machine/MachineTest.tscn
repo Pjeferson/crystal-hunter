@@ -29,4 +29,4 @@ position = Vector2( 130.669, -8.89005 )
 position = Vector2( 67.795, 47.319 )
 
 [node name="Isa" parent="." instance=ExtResource( 3 )]
-position = Vector2( -113.828, 3.92406 )
+position = Vector2( -159.828, -68.0759 )
