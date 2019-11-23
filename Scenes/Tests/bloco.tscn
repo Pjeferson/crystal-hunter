@@ -6,7 +6,7 @@
 extents = Vector2( 31.8889, 31.5555 )
 
 [node name="Sprite" type="Sprite"]
-position = Vector2( 173, 146 )
+position = Vector2( 159, 91 )
 texture = ExtResource( 1 )
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]

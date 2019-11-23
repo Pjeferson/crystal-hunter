@@ -7,6 +7,7 @@
 position = Vector2( 178.367, 88.0253 )
 
 [node name="Machine" parent="." instance=ExtResource( 1 )]
+position = Vector2( 117.333, -57.3333 )
 
 [node name="Sprite" parent="." instance=ExtResource( 2 )]
 position = Vector2( 2.97211, 47.319 )
@@ -14,5 +15,8 @@ position = Vector2( 2.97211, 47.319 )
 [node name="Sprite2" parent="." instance=ExtResource( 2 )]
 position = Vector2( -59.1089, -12.4456 )
 
+[node name="Sprite4" parent="." instance=ExtResource( 2 )]
+position = Vector2( 130.669, -8.89005 )
+
 [node name="Sprite3" parent="." instance=ExtResource( 2 )]
-position = Vector2( 66.9063, -13.3722 )
+position = Vector2( 67.795, 47.319 )

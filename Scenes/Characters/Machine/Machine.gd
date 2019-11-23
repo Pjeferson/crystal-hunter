@@ -1,6 +1,6 @@
 extends KinematicBody2D
 
-const SPEED = 120
+const SPEED = 30
 const GRAVITY = 10
 const FLOOR = Vector2(0,-1)
 
@@ -14,32 +14,27 @@ func _ready():
 func _physics_process(delta):
 	chooseDirection()
 	
-	if direction == -1 and !is_attacking:
+	if !is_attacking:
 		hideSprites()
 		$Move.visible = true
-		velocity.x = -SPEED
-	elif direction == 1 and !is_attacking:
-		hideSprites()
-		$Move.visible = true
-		velocity.x = SPEED
+		$AnimationPlayer.play("Move")
+		velocity.x = SPEED * direction
 	else:
 		velocity.x = 0
-		if !is_attacking:
-			hideSprites()
-			$Idle.visible = true
-			$AnimationPlayer.play("Idle")
-	if $RayCast2D.is_colliding() == true:
+		
+	velocity.y += GRAVITY
+	velocity = move_and_slide(velocity, FLOOR)
+	
+	if is_on_wall():
 		direction *= -1
 		$RayCast2D.position.x *= -1
-	
-	if Input.is_action_just_pressed("ui_select") and !is_attacking and is_on_floor():
+		
+	if $RayCast2D.is_colliding():
+		#é player?
 		is_attacking = true
 		hideSprites()
 		$Attack.visible = true
 		$AnimationPlayer.play("Attack")
-	
-	velocity.y += GRAVITY
-	velocity = move_and_slide(velocity, FLOOR)
 	
 func hideSprites():
 	$Idle.visible = false
