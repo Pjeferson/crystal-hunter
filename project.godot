@@ -16,7 +16,7 @@ _global_script_class_icons={
 [application]
 
 config/name="Crystal Hunter"
-run/main_scene="res://StageCastle.tscn"
+run/main_scene="res://Scenes/Scenarios/StageCastle.tscn"
 config/icon="res://icon.png"
 
 [display]
