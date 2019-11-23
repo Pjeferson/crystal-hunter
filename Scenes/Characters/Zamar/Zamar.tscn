@@ -1,0 +1,39 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Sprites/Zamar/206001803_idle.png" type="Texture" id=1]
+
+[sub_resource type="Animation" id=1]
+resource_name = "idle"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/path = NodePath("Idle:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3 ]
+}
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 10.4619, 14.9265 )
+
+[node name="Zamar" type="KinematicBody2D"]
+
+[node name="Idle" type="Sprite" parent="."]
+position = Vector2( 167.601, 96.3705 )
+scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 1 )
+vframes = 2
+hframes = 3
+frame = 3
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/idle = SubResource( 1 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( 165.92, 95.1902 )
+shape = SubResource( 2 )
