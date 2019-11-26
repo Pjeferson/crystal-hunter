@@ -33,4 +33,4 @@ position = Vector2( 67.795, 47.319 )
 position = Vector2( -113.828, 3.92406 )
 
 [node name="Makai" parent="." instance=ExtResource( 4 )]
-position = Vector2( -48.092, -162.648 )
+position = Vector2( -49.092, -167.648 )

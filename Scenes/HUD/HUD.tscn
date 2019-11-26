@@ -1,0 +1,69 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://Scenes/Scenarios/HBoxContainer.gd" type="Script" id=1]
+[ext_resource path="res://Sprites/Items/Crystals/Crystal1.png" type="Texture" id=2]
+[ext_resource path="res://Sprites/Items/Crystals/Crystal2.png" type="Texture" id=3]
+[ext_resource path="res://Sprites/Items/Crystals/Crystal3.png" type="Texture" id=4]
+[ext_resource path="res://Sprites/HUD/lifebar_bg.png" type="Texture" id=5]
+[ext_resource path="res://Sprites/HUD/lifebar_fill.png" type="Texture" id=6]
+
+[node name="HBoxContainer" type="HBoxContainer"]
+anchor_right = 1.0
+margin_left = 1.0
+margin_top = 1.0
+margin_right = -158.0
+margin_bottom = 12.0
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Crystal1" type="Sprite" parent="."]
+position = Vector2( 104, 0 )
+texture = ExtResource( 2 )
+offset = Vector2( -95, 21 )
+
+[node name="Crystal2" type="Sprite" parent="."]
+position = Vector2( 104, 0 )
+texture = ExtResource( 3 )
+offset = Vector2( -80, 22 )
+
+[node name="Crystal3" type="Sprite" parent="."]
+visible = false
+position = Vector2( 106.41, -0.299289 )
+scale = Vector2( 1.23951, 1.22394 )
+texture = ExtResource( 4 )
+offset = Vector2( -56, 18 )
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+visible = false
+margin_right = 50.0
+margin_bottom = 12.0
+rect_min_size = Vector2( 50, 0 )
+
+[node name="NinePatchRect" type="NinePatchRect" parent="MarginContainer"]
+margin_right = 50.0
+margin_bottom = 12.0
+
+[node name="HP" type="Label" parent="MarginContainer/NinePatchRect"]
+margin_left = 0.888874
+margin_top = 0.666672
+margin_right = 50.8889
+margin_bottom = 14.6667
+text = "HP"
+valign = 2
+
+[node name="Label" type="Label" parent="MarginContainer/NinePatchRect"]
+margin_left = 20.6667
+margin_top = 0.888893
+margin_right = 39.6667
+margin_bottom = 14.8889
+text = "10"
+valign = 2
+
+[node name="TextureProgress" type="TextureProgress" parent="."]
+margin_right = 100.0
+margin_bottom = 11.0
+value = 50.0
+texture_under = ExtResource( 5 )
+texture_progress = ExtResource( 6 )

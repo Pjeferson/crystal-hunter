@@ -5,6 +5,7 @@
 [ext_resource path="res://Sprites/Isa/100010104_atk.png" type="Texture" id=3]
 [ext_resource path="res://Sprites/Isa/100010104_move.png" type="Texture" id=4]
 [ext_resource path="res://Sprites/Isa/100010104_jump.png" type="Texture" id=5]
+[ext_resource path="res://Sprites/Isa/100010104_dead.png" type="Texture" id=6]
 
 [sub_resource type="Animation" id=1]
 resource_name = "Attack"
@@ -38,7 +39,7 @@ tracks/0/keys = {
 "values": [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 ]
 }
 
-[sub_resource type="Animation" id=6]
+[sub_resource type="Animation" id=3]
 resource_name = "Jump"
 length = 0.1
 tracks/0/type = "value"
@@ -54,7 +55,7 @@ tracks/0/keys = {
 "values": [ 0 ]
 }
 
-[sub_resource type="Animation" id=7]
+[sub_resource type="Animation" id=4]
 length = 0.1
 tracks/0/type = "value"
 tracks/0/path = NodePath("Move:frame")
@@ -69,11 +70,8 @@ tracks/0/keys = {
 "values": [ 0 ]
 }
 
-[sub_resource type="RectangleShape2D" id=5]
-extents = Vector2( 9.65428, 10.3334 )
-
 [node name="Isa" type="KinematicBody2D"]
-position = Vector2( 166, 85 )
+position = Vector2( 164, 83 )
 script = ExtResource( 1 )
 
 [node name="Idle" type="Sprite" parent="."]
@@ -88,8 +86,8 @@ region_rect = Rect2( 0, 0, 258, 252 )
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/Attack = SubResource( 1 )
 anims/Idle = SubResource( 2 )
-anims/Jump = SubResource( 6 )
-anims/Move = SubResource( 7 )
+anims/Jump = SubResource( 3 )
+anims/Move = SubResource( 4 )
 
 [node name="Attack" type="Sprite" parent="."]
 position = Vector2( -5.20987, 2.0247 )
@@ -97,19 +95,46 @@ scale = Vector2( 0.5, 0.5 )
 texture = ExtResource( 3 )
 vframes = 4
 hframes = 3
+frame = 6
 region_rect = Rect2( 0, 0, 369, 364 )
 
 [node name="Move" type="Sprite" parent="."]
+visible = false
 position = Vector2( -1.82718, 1.53087 )
 scale = Vector2( 0.5, 0.5 )
 texture = ExtResource( 4 )
 
 [node name="Jump" type="Sprite" parent="."]
+visible = false
 position = Vector2( -1.71193, -0.790123 )
 scale = Vector2( 0.5, 0.5 )
 texture = ExtResource( 5 )
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( 1.58028, 0.790138 )
-shape = SubResource( 5 )
+[node name="Dying" type="Sprite" parent="."]
+visible = false
+position = Vector2( -2.17282, 8.88889 )
+scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 6 )
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+polygon = PoolVector2Array( 3.13579, -14.1852, -1.6138, -8.23459, -3.39157, 11.5185, 8.25926, 11.037, 6.88004, -8.23459 )
+
+[node name="Camera2D" type="Camera2D" parent="."]
+current = true
+limit_left = 0
+limit_top = -130
+limit_right = 1410
+limit_bottom = 333
+smoothing_enabled = true
+smoothing_speed = 10.0
+editor_draw_limits = true
+
+[node name="RayCast2D" type="RayCast2D" parent="."]
+enabled = true
+cast_to = Vector2( -22, 2 )
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]
+[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]

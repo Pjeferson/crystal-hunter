@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://Scenes/Characters/Machine/Machine.gd" type="Script" id=1]
 [ext_resource path="res://Sprites/Machine/100006204_idle.png" type="Texture" id=2]
@@ -68,13 +68,15 @@ tracks/0/keys = {
 "values": [ 0, 1, 2, 3 ]
 }
 
-[sub_resource type="RectangleShape2D" id=5]
-extents = Vector2( 24.4401, 27.3066 )
-
 [node name="Machine" type="KinematicBody2D"]
+position = Vector2( 66.3704, 24.0988 )
 script = ExtResource( 1 )
+__meta__ = {
+"_edit_group_": true
+}
 
 [node name="Idle" type="Sprite" parent="."]
+visible = false
 scale = Vector2( 0.5, 0.5 )
 texture = ExtResource( 2 )
 vframes = 6
@@ -101,7 +103,7 @@ scale = Vector2( 0.5, 0.5 )
 texture = ExtResource( 4 )
 vframes = 7
 hframes = 3
-frame = 16
+frame = 13
 
 [node name="Dying" type="Sprite" parent="."]
 visible = false
@@ -112,11 +114,11 @@ vframes = 2
 hframes = 3
 frame = 3
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( 6.17483, 8.11768 )
-shape = SubResource( 5 )
-
 [node name="RayCast2D" type="RayCast2D" parent="."]
+position = Vector2( -20, 17 )
 enabled = true
-cast_to = Vector2( -35, 26 )
+cast_to = Vector2( -14, 7 )
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+polygon = PoolVector2Array( -6.23866, -13.3239, -15.1276, -3.84238, -22.8313, 15.3181, -24.2469, 29.3428, 21.5803, 26.3798, 24.1481, 19.2687, 25.1358, 11.1699, 30.4691, 2.6761, 27.7037, -6.80538 )
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]
