@@ -27,11 +27,13 @@ func _physics_process(delta):
 			direction = -1
 			hideSprites()
 			$Move.visible = true
+			$AnimationPlayer.play("Move")
 			velocity.x = -SPEED
 		elif Input.is_action_pressed("ui_right") and !is_attacking:
 			direction = 1
 			hideSprites()
 			$Move.visible = true
+			$AnimationPlayer.play("Move")
 			velocity.x = SPEED
 		else:
 			velocity.x = 0

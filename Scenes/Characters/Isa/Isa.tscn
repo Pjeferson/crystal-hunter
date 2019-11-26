@@ -3,8 +3,8 @@
 [ext_resource path="res://Scenes/Characters/Isa/Isa.gd" type="Script" id=1]
 [ext_resource path="res://Sprites/Isa/100010104_idle.png" type="Texture" id=2]
 [ext_resource path="res://Sprites/Isa/100010104_atk.png" type="Texture" id=3]
-[ext_resource path="res://Sprites/Isa/100010104_move.png" type="Texture" id=4]
-[ext_resource path="res://Sprites/Isa/100010104_jump.png" type="Texture" id=5]
+[ext_resource path="res://Sprites/Isa/100010104_move2.png" type="Texture" id=4]
+[ext_resource path="res://Sprites/Isa/100010104_jump2.png" type="Texture" id=5]
 [ext_resource path="res://Sprites/Isa/100010104_dead.png" type="Texture" id=6]
 
 [sub_resource type="Animation" id=1]
@@ -41,7 +41,7 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id=3]
 resource_name = "Jump"
-length = 0.1
+length = 1.2
 tracks/0/type = "value"
 tracks/0/path = NodePath("Jump:frame")
 tracks/0/interp = 1
@@ -49,14 +49,14 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1, 1.1 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
 "update": 1,
-"values": [ 0 ]
+"values": [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11 ]
 }
 
 [sub_resource type="Animation" id=4]
-length = 0.1
+length = 1.2
 tracks/0/type = "value"
 tracks/0/path = NodePath("Move:frame")
 tracks/0/interp = 1
@@ -64,10 +64,10 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1, 1.1 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
 "update": 1,
-"values": [ 0 ]
+"values": [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11 ]
 }
 
 [node name="Isa" type="KinematicBody2D"]
@@ -90,6 +90,7 @@ anims/Jump = SubResource( 3 )
 anims/Move = SubResource( 4 )
 
 [node name="Attack" type="Sprite" parent="."]
+visible = false
 position = Vector2( -5.20987, 2.0247 )
 scale = Vector2( 0.5, 0.5 )
 texture = ExtResource( 3 )
@@ -100,15 +101,19 @@ region_rect = Rect2( 0, 0, 369, 364 )
 
 [node name="Move" type="Sprite" parent="."]
 visible = false
-position = Vector2( -1.82718, 1.53087 )
+position = Vector2( -1.16875, 1.00412 )
 scale = Vector2( 0.5, 0.5 )
 texture = ExtResource( 4 )
+vframes = 4
+hframes = 3
 
 [node name="Jump" type="Sprite" parent="."]
-visible = false
-position = Vector2( -1.71193, -0.790123 )
+position = Vector2( -1.18518, 0.965706 )
 scale = Vector2( 0.5, 0.5 )
 texture = ExtResource( 5 )
+vframes = 4
+hframes = 3
+frame = 11
 
 [node name="Dying" type="Sprite" parent="."]
 visible = false
