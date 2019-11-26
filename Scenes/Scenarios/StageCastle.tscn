@@ -57,6 +57,6 @@ margin_bottom = 49.8337
 position = Vector2( 1048.77, 244.337 )
 [connection signal="hp_change" from="Isa" to="CanvasLayer/HBoxContainer" method="_on_Isa_hp_change"]
 [connection signal="give_crystal" from="Makai" to="Crystal" method="_on_Makai_give_crystal"]
-[connection signal="catch_crystal" from="Crystal" to="CanvasLayer/HBoxContainer" method="_on_Crystal_catch_crystal"]
 [connection signal="catch_crystal" from="Crystal" to="Isa" method="_on_Crystal_catch_crystal"]
+[connection signal="catch_crystal" from="Crystal" to="CanvasLayer/HBoxContainer" method="_on_Crystal_catch_crystal"]
 [connection signal="body_entered" from="Collider" to="Isa" method="_on_Collider_body_entered"]

@@ -55,6 +55,10 @@ func _physics_process(delta):
 		if Input.is_action_pressed("ui_up") and !is_attacking and is_on_floor():
 			velocity.y = JUMP
 		
+		if Input.is_action_just_pressed("ui_cancel"):
+			get_tree().change_scene("res://Scenes/Utilities/MenuPause.tscn")
+		
+		
 		if Input.is_action_just_pressed("ui_select") and !is_attacking and is_on_floor():
 			is_attacking = true
 			hideSprites()
@@ -102,8 +106,7 @@ func _on_AnimationPlayer_animation_finished(anim_name):
 
 
 func _on_Timer_timeout():
-	#get_tree().change_scene("res://Menu.tscn")
-	get_tree().change_scene("res://Scenes/Scenarios/StageCastle.tscn")
+	get_tree().change_scene("res://Scenes/Utilities/MenuPause.tscn")
 
 func _on_Crystal_catch_crystal(number):
 	$Castle.stop()
