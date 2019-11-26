@@ -13,24 +13,33 @@ export (int) var direction = -1
 var velocity = Vector2()
 var is_attacking = false
 var is_dead = false
+var last_direction
 
 func _ready():
 	emit_signal("hp_change", hp)
+	scale.x = -direction
+	last_direction= direction
 
 func _physics_process(delta):
-	chooseDirection()
+	
 	if is_dead:
 		hideSprites()
 		$Dying.visible = true
 	else:
 		if Input.is_action_pressed("ui_left") and !is_attacking:
 			direction = -1
+			if(last_direction != direction):
+				scale.x *= -1
+				last_direction = -1
 			hideSprites()
 			$Move.visible = true
 			$AnimationPlayer.play("Move")
 			velocity.x = -SPEED
 		elif Input.is_action_pressed("ui_right") and !is_attacking:
 			direction = 1
+			if(last_direction != direction):
+				scale.x *= -1
+				last_direction = 1
 			hideSprites()
 			$Move.visible = true
 			$AnimationPlayer.play("Move")
@@ -41,7 +50,7 @@ func _physics_process(delta):
 				hideSprites()
 				$Idle.visible = true
 				$AnimationPlayer.play("Idle")
-		
+			
 		if Input.is_action_pressed("ui_up") and !is_attacking and is_on_floor():
 			velocity.y = JUMP
 		
@@ -77,22 +86,6 @@ func hideSprites():
 	$Move.visible = false
 	$Jump.visible = false
 	$Dying.visible = false
-	
-func chooseDirection():
-	if direction > 0:
-		$Idle.flip_h = true
-		$Attack.flip_h = true
-		$Move.flip_h = true
-		$Jump.flip_h = true
-		$Dying.flip_h = true
-		$RayCast2D.cast_to.x = abs($RayCast2D.cast_to.x) 
-	else:
-		$Idle.flip_h = false
-		$Attack.flip_h = false
-		$Move.flip_h = false
-		$Jump.flip_h = false
-		$Dying.flip_h = false
-		$RayCast2D.cast_to.x = abs($RayCast2D.cast_to.x) * -1 		
 
 func _on_AnimationPlayer_animation_finished(anim_name):
 	if anim_name == "Attack":

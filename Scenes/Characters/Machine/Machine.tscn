@@ -69,7 +69,8 @@ tracks/0/keys = {
 }
 
 [node name="Machine" type="KinematicBody2D"]
-position = Vector2( 66.3704, 24.0988 )
+position = Vector2( 66.37, 24.099 )
+scale = Vector2( -1, 1 )
 script = ExtResource( 1 )
 __meta__ = {
 "_edit_group_": true
@@ -103,7 +104,7 @@ scale = Vector2( 0.5, 0.5 )
 texture = ExtResource( 4 )
 vframes = 7
 hframes = 3
-frame = 13
+frame = 20
 
 [node name="Dying" type="Sprite" parent="."]
 visible = false
@@ -120,5 +121,5 @@ enabled = true
 cast_to = Vector2( -14, 7 )
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
-polygon = PoolVector2Array( -6.23866, -13.3239, -15.1276, -3.84238, -22.8313, 15.3181, -24.2469, 29.3428, 21.5803, 26.3798, 24.1481, 19.2687, 25.1358, 11.1699, 30.4691, 2.6761, 27.7037, -6.80538 )
+polygon = PoolVector2Array( -3.67082, -12.1387, -13.1523, -4.83008, -22.8313, 15.3181, -23.4239, 28.5526, 21.2181, 28.7502, 22.9958, 18.0835, 28.3292, 6.03412, 27.7037, -6.80538 )
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]

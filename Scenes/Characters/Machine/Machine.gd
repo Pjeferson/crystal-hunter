@@ -12,10 +12,9 @@ var is_attacking = false
 var is_dead = false
 
 func _ready():
-	pass
+	scale.x = -direction
 
 func _physics_process(delta):
-	chooseDirection()
 	if is_dead:
 		hideSprites()	
 		$Dying.visible = true
@@ -35,14 +34,11 @@ func _physics_process(delta):
 		
 		if is_on_wall():
 			direction *= -1
-			$CollisionPolygon2D.scale.x *= -1
-			$RayCast2D.position.x *= -1
-			$RayCast2D.cast_to.x *= -1
+			scale.x *= -1
 		
 		if $RayCast2D.is_colliding() && !is_attacking:
 			var object = $RayCast2D.get_collider()
 			if "Isa" in object.get_name():
-				object.get_hit(10)
 				is_attacking = true
 				hideSprites()
 				$Attack.visible = true
@@ -60,20 +56,12 @@ func hideSprites():
 	$Attack.visible = false
 	$Move.visible = false
 	$Dying.visible = false
-	
-func chooseDirection():
-	if direction > 0:
-		$Idle.flip_h = true
-		$Attack.flip_h = true
-		$Move.flip_h = true
-		$Dying.flip_h = true
-	else:
-		$Idle.flip_h = false
-		$Attack.flip_h = false
-		$Move.flip_h = false
-		$Dying.flip_h = false
-
 
 func _on_AnimationPlayer_animation_finished(anim_name):
 	if anim_name == "Attack":
 		is_attacking = false
+		if $RayCast2D.is_colliding():
+			var object = $RayCast2D.get_collider()
+			if "Isa" in object.get_name():
+				object.get_hit(10)
+				

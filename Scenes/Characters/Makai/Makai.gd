@@ -15,10 +15,9 @@ var is_dead = false
 var atks = 0
 
 func _ready():
-	pass
+	scale.x = -direction
 
 func _physics_process(delta):
-	chooseDirection()
 	if is_dead:
 		hideSprites()
 		$Dying.visible = true
@@ -38,12 +37,8 @@ func _physics_process(delta):
 		
 		if is_on_wall():
 			direction *= -1
-			$CollisionPolygon2D.scale.x *= -1
-			$RayCast2D.position.x *= -1
-			$RayCast2D.cast_to.x *= -1
-			$RayCast2D2.position.x *= -1
-			$RayCast2D2.cast_to.x *= -1
-		
+			scale.x *= -1
+			
 		if $RayCast2D.is_colliding() && !is_attacking:
 			var object = $RayCast2D.get_collider()
 			if "Isa" in object.get_name():
@@ -74,33 +69,13 @@ func hideSprites():
 	$Dying.visible = false
 	$Jump.visible = false
 	$Limit_Attack.visible = false
-	
-func chooseDirection():
-	if direction > 0:
-		$Idle.flip_h = true
-		$Attack.flip_h = true
-		$Attack.position.x = abs($Attack.position.x)
-		$Move.flip_h = true
-		$Dying.flip_h = true
-		$Jump.flip_h = true
-		$Limit_Attack.flip_h = true
-		$Limit_Attack.position.x = abs($Limit_Attack.position.x)		
-	else:
-		$Idle.flip_h = false
-		$Attack.flip_h = false
-		$Attack.position.x = abs($Attack.position.x) * -1
-		$Move.flip_h = false
-		$Dying.flip_h = false
-		$Jump.flip_h = false
-		$Limit_Attack.flip_h = false
-		$Limit_Attack.position.x = abs($Limit_Attack.position.x) * -1
-
 
 func _on_AnimationPlayer_animation_finished(anim_name):
 	if anim_name == "Attack":
 		if $RayCast2D.is_colliding():
 			var object = $RayCast2D.get_collider()
-			object.get_hit(10)
+			if "Isa" in object.get_name():
+				object.get_hit(10)
 		is_attacking = false
 	elif anim_name == "Limit_Attack":
 		if $RayCast2D2.is_colliding():
