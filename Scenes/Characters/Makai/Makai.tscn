@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://Scenes/Characters/Makai/Makai.gd" type="Script" id=1]
 [ext_resource path="res://Sprites/Makai/204001705_idle.png" type="Texture" id=2]
@@ -7,6 +7,7 @@
 [ext_resource path="res://Sprites/Makai/204001705_move.png" type="Texture" id=5]
 [ext_resource path="res://Sprites/Makai/204001705_limit_atk.png" type="Texture" id=6]
 [ext_resource path="res://Sprites/Makai/204001705_dead.png" type="Texture" id=7]
+[ext_resource path="res://Sounds/Effects/Dragon_Growl_01.wav" type="AudioStream" id=8]
 
 [sub_resource type="Animation" id=1]
 resource_name = "Attack"
@@ -168,4 +169,7 @@ cast_to = Vector2( -180, 0 )
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
 polygon = PoolVector2Array( -3.30863, -18.5185, -11.4074, -7.4568, -9.43209, 5.58023, -8.54355, 23.9753, 6.66633, 24.1729, 8.4441, 3.03706, 7.55556, -11.6049 )
+
+[node name="Limit_AttackFX" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 8 )
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]

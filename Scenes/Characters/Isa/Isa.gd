@@ -16,6 +16,7 @@ var is_dead = false
 var last_direction
 
 func _ready():
+	$Castle.play()
 	emit_signal("hp_change", hp)
 	scale.x = -direction
 	last_direction= direction
@@ -59,6 +60,7 @@ func _physics_process(delta):
 			hideSprites()
 			$Attack.visible = true
 			$AnimationPlayer.play("Attack")
+			$AttackFx.play()
 		
 		if !is_on_floor() && !is_attacking:
 			hideSprites()
@@ -73,6 +75,9 @@ func get_hit(power):
 	hp -= power
 	if hp <= 0:
 		is_dead = true
+		$Castle.stop()
+		$Boss.stop()
+		$LoseFx.play()
 		$Timer.start()
 	emit_signal("hp_change", hp)
 
@@ -99,3 +104,12 @@ func _on_AnimationPlayer_animation_finished(anim_name):
 func _on_Timer_timeout():
 	#get_tree().change_scene("res://Menu.tscn")
 	get_tree().change_scene("res://Scenes/Scenarios/StageCastle.tscn")
+
+func _on_Crystal_catch_crystal(number):
+	$Castle.stop()
+	$Boss.stop()
+	$WinFx.play()
+
+func _on_Collider_body_entered(body):
+	$Castle.stop()
+	$Boss.play()

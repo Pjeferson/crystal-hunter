@@ -47,6 +47,7 @@ func _physics_process(delta):
 				if atks == 3:
 					$Limit_Attack.visible = true
 					$AnimationPlayer.play("Limit_Attack")
+					$Limit_AttackFX.play()
 					atks = 0
 				else:
 					$Attack.visible = true

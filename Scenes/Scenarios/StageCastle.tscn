@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://Scenes/Tilesets/Castle/Castle.tres" type="TileSet" id=1]
 [ext_resource path="res://Scenes/Characters/Isa/Isa.tscn" type="PackedScene" id=2]
@@ -7,6 +7,7 @@
 [ext_resource path="res://Scenes/Items/Life.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Scenes/Items/Crystal.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Scenes/HUD/HUD.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Scenes/Utilities/Collider.tscn" type="PackedScene" id=8]
 
 [node name="StageCastle" type="Node2D"]
 
@@ -51,6 +52,11 @@ margin_left = -7.99997
 margin_top = -3.16665
 margin_right = 442.0
 margin_bottom = 49.8337
+
+[node name="Collider" parent="." instance=ExtResource( 8 )]
+position = Vector2( 1048.77, 244.337 )
 [connection signal="hp_change" from="Isa" to="CanvasLayer/HBoxContainer" method="_on_Isa_hp_change"]
 [connection signal="give_crystal" from="Makai" to="Crystal" method="_on_Makai_give_crystal"]
 [connection signal="catch_crystal" from="Crystal" to="CanvasLayer/HBoxContainer" method="_on_Crystal_catch_crystal"]
+[connection signal="catch_crystal" from="Crystal" to="Isa" method="_on_Crystal_catch_crystal"]
+[connection signal="body_entered" from="Collider" to="Isa" method="_on_Collider_body_entered"]
