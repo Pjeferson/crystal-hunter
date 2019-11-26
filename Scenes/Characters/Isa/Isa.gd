@@ -65,6 +65,7 @@ func _physics_process(delta):
 			$Attack.visible = true
 			$AnimationPlayer.play("Attack")
 			$AttackFx.play()
+			$TimerAttack.start()
 		
 		if !is_on_floor() && !is_attacking:
 			hideSprites()
@@ -104,8 +105,9 @@ func _on_AnimationPlayer_animation_finished(anim_name):
 			if "Makai" in object.get_name() or "Machine" in object.get_name():
 				object.get_hit(20)
 
-
 func _on_Timer_timeout():
+	$LoseFx.stop()
+	print("!!")
 	get_tree().change_scene("res://Scenes/Utilities/MenuPause.tscn")
 
 func _on_Crystal_catch_crystal(number):
@@ -116,3 +118,7 @@ func _on_Crystal_catch_crystal(number):
 func _on_Collider_body_entered(body):
 	$Castle.stop()
 	$Boss.play()
+
+
+func _on_TimerAttack_timeout():
+	$AttackFx.play()

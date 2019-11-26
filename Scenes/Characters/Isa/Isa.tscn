@@ -143,23 +143,31 @@ editor_draw_limits = true
 enabled = true
 cast_to = Vector2( -22, 2 )
 
+[node name="TimerAttack" type="Timer" parent="."]
+wait_time = 0.6
+one_shot = true
+
 [node name="Timer" type="Timer" parent="."]
 wait_time = 2.0
-one_shot = true
 
 [node name="AttackFx" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 7 )
 
 [node name="WinFx" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 8 )
+volume_db = -8.851
 
 [node name="LoseFx" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 9 )
+volume_db = -1.107
 
 [node name="Castle" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 10 )
+volume_db = -13.277
 
 [node name="Boss" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 11 )
+volume_db = -7.945
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]
+[connection signal="timeout" from="TimerAttack" to="." method="_on_TimerAttack_timeout"]
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
