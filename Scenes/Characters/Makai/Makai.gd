@@ -48,6 +48,7 @@ func _physics_process(delta):
 					$Limit_Attack.visible = true
 					$AnimationPlayer.play("Limit_Attack")
 					$Limit_AttackFX.play()
+					get_parent().get_node("ScreenShake").screen_shake(4, 9, 100)
 					atks = 0
 				else:
 					$Attack.visible = true
