@@ -14,6 +14,7 @@ var velocity = Vector2()
 var is_attacking = false
 var is_dead = false
 var last_direction
+var is_stop = false
 
 func _ready():
 	$Castle.play()
@@ -22,12 +23,11 @@ func _ready():
 	last_direction= direction
 
 func _physics_process(delta):
-	
 	if is_dead:
 		hideSprites()
 		$Dying.visible = true
 	else:
-		if Input.is_action_pressed("ui_left") and !is_attacking:
+		if Input.is_action_pressed("ui_left") and !is_attacking and !is_stop:
 			direction = -1
 			if(last_direction != direction):
 				scale.x *= -1
@@ -36,7 +36,7 @@ func _physics_process(delta):
 			$Move.visible = true
 			$AnimationPlayer.play("Move")
 			velocity.x = -SPEED
-		elif Input.is_action_pressed("ui_right") and !is_attacking:
+		elif Input.is_action_pressed("ui_right") and !is_attacking and !is_stop:
 			direction = 1
 			if(last_direction != direction):
 				scale.x *= -1
@@ -52,14 +52,14 @@ func _physics_process(delta):
 				$Idle.visible = true
 				$AnimationPlayer.play("Idle")
 			
-		if Input.is_action_pressed("ui_up") and !is_attacking and is_on_floor():
+		if Input.is_action_pressed("ui_up") and !is_attacking and is_on_floor() and !is_stop:
 			velocity.y = JUMP
 		
 		if Input.is_action_just_pressed("ui_cancel"):
 			get_tree().change_scene("res://Scenes/Utilities/MenuPause.tscn")
 		
 		
-		if Input.is_action_just_pressed("ui_select") and !is_attacking and is_on_floor():
+		if Input.is_action_just_pressed("ui_select") and !is_attacking and is_on_floor() and !is_stop:
 			is_attacking = true
 			hideSprites()
 			$Attack.visible = true
@@ -122,3 +122,11 @@ func _on_Collider_body_entered(body):
 
 func _on_TimerAttack_timeout():
 	$AttackFx.play()
+
+
+func _on_RichTextLabel_stop_game():
+	is_stop = true
+
+
+func _on_RichTextLabel_resume_game():
+	is_stop = false

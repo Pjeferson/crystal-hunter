@@ -1,13 +1,15 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://Scenes/Tilesets/Castle/Castle.tres" type="TileSet" id=1]
 [ext_resource path="res://Scenes/Characters/Isa/Isa.tscn" type="PackedScene" id=2]
-[ext_resource path="res://Scenes/Characters/Machine/Machine.tscn" type="PackedScene" id=3]
-[ext_resource path="res://Scenes/Characters/Makai/Makai.tscn" type="PackedScene" id=4]
-[ext_resource path="res://Scenes/Items/Life.tscn" type="PackedScene" id=5]
-[ext_resource path="res://Scenes/Items/Crystal.tscn" type="PackedScene" id=6]
-[ext_resource path="res://Scenes/HUD/HUD.tscn" type="PackedScene" id=7]
-[ext_resource path="res://Scenes/Utilities/Collider.tscn" type="PackedScene" id=8]
+[ext_resource path="res://Scenes/Characters/Zamar/Zamar.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Scenes/Characters/Machine/Machine.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Scenes/Characters/Makai/Makai.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Scenes/Items/Life.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Scenes/Items/Crystal.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Scenes/HUD/HUD.tscn" type="PackedScene" id=8]
+[ext_resource path="res://Scenes/Utilities/Collider.tscn" type="PackedScene" id=9]
+[ext_resource path="res://Scenes/Scenarios/RichTextLabel.gd" type="Script" id=10]
 
 [node name="StageCastle" type="Node2D"]
 
@@ -22,41 +24,69 @@ position = Vector2( 93.407, 141.084 )
 z_index = 1
 direction = 1
 
-[node name="Machine1" parent="." instance=ExtResource( 3 )]
+[node name="Zamar" parent="." instance=ExtResource( 3 )]
+position = Vector2( 43, 141 )
+direction = 1
+
+[node name="Machine1" parent="." instance=ExtResource( 4 )]
 position = Vector2( 483.7, 186 )
 direction = 1
 
-[node name="Machine2" parent="." instance=ExtResource( 3 )]
+[node name="Machine2" parent="." instance=ExtResource( 4 )]
 position = Vector2( 741.867, 236.167 )
 direction = 1
 
-[node name="Makai" parent="." instance=ExtResource( 4 )]
+[node name="Makai" parent="." instance=ExtResource( 5 )]
 position = Vector2( 1354.96, 267.889 )
 
-[node name="Life1" parent="." instance=ExtResource( 5 )]
+[node name="Life1" parent="." instance=ExtResource( 6 )]
 position = Vector2( 350.648, -37.4259 )
 
-[node name="Life2" parent="." instance=ExtResource( 5 )]
+[node name="Life2" parent="." instance=ExtResource( 6 )]
 position = Vector2( 992.667, 236.667 )
 
-[node name="Crystal" parent="." instance=ExtResource( 6 )]
+[node name="Crystal" parent="." instance=ExtResource( 7 )]
 visible = false
 position = Vector2( 1367.89, 234 )
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
+editor/display_folded = true
 offset = Vector2( 10, 10 )
 transform = Transform2D( 1, 0, 0, 1, 10, 10 )
 
-[node name="HBoxContainer" parent="CanvasLayer" instance=ExtResource( 7 )]
+[node name="HBoxContainer" parent="CanvasLayer" instance=ExtResource( 8 )]
 margin_left = -7.99997
 margin_top = -3.16665
 margin_right = 442.0
 margin_bottom = 49.8337
 
-[node name="Collider" parent="." instance=ExtResource( 8 )]
+[node name="Collider" parent="." instance=ExtResource( 9 )]
 position = Vector2( 1048.77, 244.337 )
+
+[node name="Polygon2D" type="Polygon2D" parent="."]
+color = Color( 0.282353, 0.278431, 0.278431, 0.737255 )
+offset = Vector2( -8, -4 )
+polygon = PoolVector2Array( 48, 176, 48, 224, 272, 224, 272, 176 )
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Polygon2D"]
+margin_left = 48.0
+margin_top = 180.0
+margin_right = 256.0
+margin_bottom = 212.0
+bbcode_enabled = true
+bbcode_text = "Hello!"
+text = "Hello!"
+script = ExtResource( 10 )
+
+[node name="Timer" type="Timer" parent="Polygon2D"]
+wait_time = 0.05
+autostart = true
 [connection signal="hp_change" from="Isa" to="CanvasLayer/HBoxContainer" method="_on_Isa_hp_change"]
 [connection signal="give_crystal" from="Makai" to="Crystal" method="_on_Makai_give_crystal"]
-[connection signal="catch_crystal" from="Crystal" to="Isa" method="_on_Crystal_catch_crystal"]
 [connection signal="catch_crystal" from="Crystal" to="CanvasLayer/HBoxContainer" method="_on_Crystal_catch_crystal"]
+[connection signal="catch_crystal" from="Crystal" to="Isa" method="_on_Crystal_catch_crystal"]
 [connection signal="body_entered" from="Collider" to="Isa" method="_on_Collider_body_entered"]
+[connection signal="resume_game" from="Polygon2D/RichTextLabel" to="Zamar" method="_on_RichTextLabel_resume_game"]
+[connection signal="resume_game" from="Polygon2D/RichTextLabel" to="Isa" method="_on_RichTextLabel_resume_game"]
+[connection signal="stop_game" from="Polygon2D/RichTextLabel" to="Isa" method="_on_RichTextLabel_stop_game"]
+[connection signal="timeout" from="Polygon2D/Timer" to="Polygon2D/RichTextLabel" method="_on_Timer_timeout"]
